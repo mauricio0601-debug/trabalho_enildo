@@ -16,10 +16,10 @@ def cadastrar():
     titulo("CADASTRAR ALUNO")
 
     while True:
-        nome = str(input(Fore.LIGHTBLACK_EX + "DIGITE O NOME DO ALUNO(A): \n" + Style.RESET_ALL))
+        nome = input(Fore.LIGHTBLACK_EX + "DIGITE O NOME DO ALUNO(A): \n" + Style.RESET_ALL)
         if nome.replace(" ", "").isalpha():
             break
-        elif nome ==" ":
+        elif nome =="":
             print(Fore.YELLOW + "NÃO PODE ESPAÇOS VAZIOS\n" + Style.RESET_ALL)
         else:
             print(Fore.YELLOW + "DIGITE APENAS LETRAS\n" + Style.RESET_ALL)
@@ -31,15 +31,24 @@ def cadastrar():
         
             if 0 <= nota <= 10:
                 break
-            elif nota ==" ":
+            elif nota =="":
                 print(Fore.YELLOW + "NÃO PODE ESPAÇOS VAZIOS\n" + Style.RESET_ALL)
             else:
                 print(Fore.YELLOW + "DIGITE APENAS NÚMEROS ENTRE 0 E 10\n" + Style.RESET_ALL)
         except ValueError:
             print(Fore.YELLOW + "DIGITE APENAS NÚMEROS\n")
 
+    if os.path.exists(ARQUIVO):
+        with open(ARQUIVO, "r", encoding="utf-8") as arquivo:
+            for linha in arquivo:
+                nome_existente = linha.strip().split(";")[0]
+    
+            if nome_existente.lower() == nome.lower():
+                print(Fore.RED + "ALUNO JÁ CADASTRADO, se desejar alterar alguma informação do aluno selecione a opção 3 no menu!\n" + Style.RESET_ALL)
+                return
+
     with open(ARQUIVO, "a", encoding="utf-8") as arquivo:
-        arquivo.write(f"{nome};{nota}\n")
+            arquivo.write(f"{nome};{nota}\n")    
 
     print(Fore.GREEN + "Aluno(a) cadastrado com sucesso!\n" + Style.RESET_ALL)
 
@@ -115,7 +124,7 @@ def alterar():
                     if 0 <= nova_nota <= 10:
                         break
                     if novo_nome.replace(" ", "").isalpha():
-                                        break
+                        break
                     elif nova_nota ==" ":
                         print(Fore.YELLOW + "NÃO PODE ESPAÇOS VAZIOS\n" + Style.RESET_ALL)
                     else:
