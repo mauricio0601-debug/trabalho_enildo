@@ -1,0 +1,7 @@
+clara;0.5
+adriana;5
+mauricio;10
+jose;1.2
+kaio;1.2
+lais;1.2
+pedrp;1.1
