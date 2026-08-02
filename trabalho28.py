@@ -17,38 +17,39 @@ def cadastrar():
 
     while True:
         nome = input(Fore.LIGHTBLACK_EX + "DIGITE O NOME DO ALUNO(A): \n" + Style.RESET_ALL)
-        if nome.replace(" ", "").isalpha():
-            break
-        elif nome =="":
+
+        if nome.strip() == "":
             print(Fore.YELLOW + "NÃO PODE ESPAÇOS VAZIOS\n" + Style.RESET_ALL)
+        elif nome.replace(" ", "").isalpha():
+            break
+        elif nome.strip:
+            break
         else:
             print(Fore.YELLOW + "DIGITE APENAS LETRAS\n" + Style.RESET_ALL)
 
     while True:
         try:
-            nota = float(input(Fore.LIGHTBLACK_EX + "DIGITE A NOTA DO ALUNO(A): \n" + Style.RESET_ALL).replace(",",".")) 
-            
-        
+            nota = float(input(Fore.LIGHTBLACK_EX + "DIGITE A NOTA DO ALUNO(A): \n" + Style.RESET_ALL).replace(",", "."))
+
             if 0 <= nota <= 10:
                 break
-            elif nota =="":
-                print(Fore.YELLOW + "NÃO PODE ESPAÇOS VAZIOS\n" + Style.RESET_ALL)
             else:
                 print(Fore.YELLOW + "DIGITE APENAS NÚMEROS ENTRE 0 E 10\n" + Style.RESET_ALL)
+
         except ValueError:
-            print(Fore.YELLOW + "DIGITE APENAS NÚMEROS\n")
+            print(Fore.YELLOW + "DIGITE APENAS NÚMEROS\n" + Style.RESET_ALL)
 
     if os.path.exists(ARQUIVO):
         with open(ARQUIVO, "r", encoding="utf-8") as arquivo:
             for linha in arquivo:
                 nome_existente = linha.strip().split(";")[0]
-    
-            if nome_existente.lower() == nome.lower():
-                print(Fore.RED + "ALUNO JÁ CADASTRADO, se desejar alterar alguma informação do aluno selecione a opção 3 no menu!\n" + Style.RESET_ALL)
-                return
+
+                if nome_existente.lower() == nome.lower():
+                    print(Fore.RED + "ALUNO JÁ CADASTRADO, se desejar alterar alguma informação do aluno selecione a opção 3 no menu!\n" + Style.RESET_ALL)
+                    return
 
     with open(ARQUIVO, "a", encoding="utf-8") as arquivo:
-            arquivo.write(f"{nome};{nota}\n")    
+        arquivo.write(f"{nome};{nota}\n")
 
     print(Fore.GREEN + "Aluno(a) cadastrado com sucesso!\n" + Style.RESET_ALL)
 
@@ -86,7 +87,7 @@ def listar():
         print(f"{nome:<35}{nota_cor:>18}{situacao:>34}")
 
     print("=" * 70)
-        
+
 
 def alterar():
     titulo("ALTERAR ALUNO(A)")
@@ -108,31 +109,41 @@ def alterar():
 
         if nome.lower() == aluno.lower():
             encontrado = True
+
             while True:
-                novo_nome = input(Fore.LIGHTBLACK_EX + "DIGITE O NOVO NOME DO ALUNO(A): \n" + Style.RESET_ALL)
-                if novo_nome.replace(" ", "").isalpha():
+                novo_nome = input(
+                    Fore.LIGHTBLACK_EX + "DIGITE O NOVO NOME DO ALUNO(A):\n" + Style.RESET_ALL
+                )
+
+                if novo_nome.strip() == "":
+                    print(Fore.YELLOW + "NÃO PODE ESPAÇOS VAZIOS\n" + Style.RESET_ALL)
+                elif novo_nome.replace(" ", "").isalpha():
                     break
-                elif novo_nome ==" ":
-                            print(Fore.YELLOW + "NÃO PODE ESPAÇOS VAZIOS\n" + Style.RESET_ALL)
                 else:
                     print(Fore.YELLOW + "DIGITE APENAS LETRAS\n" + Style.RESET_ALL)
 
             while True:
+                entrada = input(
+                    Fore.LIGHTBLACK_EX + "DIGITE A NOVA NOTA DO ALUNO(A):\n" + Style.RESET_ALL
+                ).strip()
+
+                if entrada == "":
+                    print(Fore.YELLOW + "NÃO PODE ESPAÇOS VAZIOS\n" + Style.RESET_ALL)
+                    continue
+
                 try:
-                    nova_nota = float(input(Fore.LIGHTBLACK_EX + "DIGITE A NOVA NOTA DO ALUNO(A): \n" + Style.RESET_ALL).replace(",","."))
-                    
+                    nova_nota = float(entrada.replace(",", "."))
+
                     if 0 <= nova_nota <= 10:
                         break
-                    if novo_nome.replace(" ", "").isalpha():
-                        break
-                    elif nova_nota ==" ":
-                        print(Fore.YELLOW + "NÃO PODE ESPAÇOS VAZIOS\n" + Style.RESET_ALL)
                     else:
-                            print(Fore.YELLOW + "DIGITE APENAS NÚMEROS ENTRE 0 E 10\n" + Style.RESET_ALL)
+                        print(Fore.YELLOW + "APENAS NOTAS ENTRE 0 E 10\n" + Style.RESET_ALL)
+
                 except ValueError:
                     print(Fore.YELLOW + "DIGITE APENAS NÚMEROS\n" + Style.RESET_ALL)
 
             nova_lista.append(f"{novo_nome};{nova_nota}\n")
+
         else:
             nova_lista.append(linha)
 

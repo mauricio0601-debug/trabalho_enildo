@@ -1,2 +1,2 @@
-teste;10.0
-teste dois;1.5
+mauricio;9.9
+ s s s;9.0
