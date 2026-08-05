@@ -16,13 +16,11 @@ def cadastrar():
     titulo("CADASTRAR ALUNO")
 
     while True:
-        nome = input(Fore.LIGHTBLACK_EX + "DIGITE O NOME DO ALUNO(A): \n" + Style.RESET_ALL)
+        nome = input(Fore.LIGHTBLACK_EX + "DIGITE O NOME DO ALUNO(A): \n" + Style.RESET_ALL).strip()
 
         if nome.strip() == "":
             print(Fore.YELLOW + "NÃO PODE ESPAÇOS VAZIOS\n" + Style.RESET_ALL)
         elif nome.replace(" ", "").isalpha():
-            break
-        elif nome.strip:
             break
         else:
             print(Fore.YELLOW + "DIGITE APENAS LETRAS\n" + Style.RESET_ALL)

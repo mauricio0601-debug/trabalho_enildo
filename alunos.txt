@@ -1,2 +1,4 @@
-mauricio;9.9
+mauricio;10.0
  s s s;9.0
+jose;6.0
+Adriana;8.3
