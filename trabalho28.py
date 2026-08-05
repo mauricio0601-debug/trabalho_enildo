@@ -55,9 +55,9 @@ def cadastrar():
 def listar():
     titulo("ALUNOS(A) CADASTRADOS")
 
-    print("=" * 70)
+    print(Fore.BLUE + "=" * 70 + Style.DIM + Style.RESET_ALL)
     print(f"{'NOME':<35}{'NOTA':>10}{'STATUS':>20}")
-    print("-" * 70)
+    print(Fore.BLUE + "-" * 70 + Style.DIM + Style.RESET_ALL)
 
     if not os.path.exists(ARQUIVO):
         print(Fore.RED + "Arquivo de cadastro inexistente!\n" + Style.RESET_ALL)
@@ -76,7 +76,7 @@ def listar():
         nota = float(dados[1])
 
         if nota >= 6:
-            situacao = Fore.GREEN + "APROVADO" + Style.RESET_ALL
+            situacao = Fore.GREEN + "APROVADO"+ Style.BRIGHT
             nota_cor = Fore.GREEN + f"{nota:.1f}" + Style.RESET_ALL
         else:
             situacao = Fore.RED + "REPROVADO" + Style.RESET_ALL
@@ -84,7 +84,7 @@ def listar():
 
         print(f"{nome:<35}{nota_cor:>18}{situacao:>34}")
 
-    print("=" * 70)
+    print(Fore.BLUE + "=" * 70 + Style.DIM + Style.RESET_ALL)
 
 
 def alterar():
@@ -109,9 +109,7 @@ def alterar():
             encontrado = True
 
             while True:
-                novo_nome = input(
-                    Fore.LIGHTBLACK_EX + "DIGITE O NOVO NOME DO ALUNO(A):\n" + Style.RESET_ALL
-                )
+                novo_nome = input(Fore.LIGHTBLACK_EX + "DIGITE O NOVO NOME DO ALUNO(A):\n" + Style.RESET_ALL)
 
                 if novo_nome.strip() == "":
                     print(Fore.YELLOW + "NÃO PODE ESPAÇOS VAZIOS\n" + Style.RESET_ALL)
@@ -121,9 +119,7 @@ def alterar():
                     print(Fore.YELLOW + "DIGITE APENAS LETRAS\n" + Style.RESET_ALL)
 
             while True:
-                entrada = input(
-                    Fore.LIGHTBLACK_EX + "DIGITE A NOVA NOTA DO ALUNO(A):\n" + Style.RESET_ALL
-                ).strip()
+                entrada = input(Fore.LIGHTBLACK_EX + "DIGITE A NOVA NOTA DO ALUNO(A):\n" + Style.RESET_ALL).strip()
 
                 if entrada == "":
                     print(Fore.YELLOW + "NÃO PODE ESPAÇOS VAZIOS\n" + Style.RESET_ALL)
